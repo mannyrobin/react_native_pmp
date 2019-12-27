@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, Text, ImageBackground, FlatView } from 'react-native';
+import { TouchableOpacity, Image, View, Text, ImageBackground, FlatList } from 'react-native';
 import Colors from '../constants/Colors';
 import Constants from '../constants/Constants';
 
@@ -26,7 +26,7 @@ export default class NewsScreen extends React.Component {
                         • Magna aliqua. Ut enim ad minim veniam
                         • Magna aliqua. Ut enim ad minim veniam
                     Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                    
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`,
                 },
                 {
                     id: '00000002',
@@ -41,7 +41,7 @@ export default class NewsScreen extends React.Component {
                         • Magna aliqua. Ut enim ad minim veniam
                         • Magna aliqua. Ut enim ad minim veniam
                     Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                    
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`,
                 },
                 {
                     id: '00000003',
@@ -56,7 +56,7 @@ export default class NewsScreen extends React.Component {
                         • Magna aliqua. Ut enim ad minim veniam
                         • Magna aliqua. Ut enim ad minim veniam
                     Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                    
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`,
                 },
             ]
         };
@@ -64,6 +64,7 @@ export default class NewsScreen extends React.Component {
 
     render() {
         let { period, articles } = this.state;
+        console.log(articles);
         return <ImageBackground style={styles.container} source={require('../assets/images/background/home.png')}>
             <View style={styles.headerOptions}>
                 <Text style={styles.title}>PMP News</Text>
@@ -85,7 +86,7 @@ export default class NewsScreen extends React.Component {
                 <TouchableOpacity style={{...styles.period, backgroundColor: period === Constants.WEEKLY_ARTICLES ? Colors.orange : Colors.gray}}
                     onPress={() => {this.setState({period: Constants.WEEKLY_ARTICLES})}}>
                     <Text>
-                            Неделя
+                        Неделя
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{...styles.period, backgroundColor: period === Constants.MONTHLY_ARTICLES ? Colors.orange : Colors.gray}}
@@ -95,15 +96,18 @@ export default class NewsScreen extends React.Component {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <FlatView
+            <FlatList
                 data={articles}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => {
-                    return <View>
-                        <Image source={item.image} style={{width: '100%', height: 200}}/>
-                        <Text>{item.title}</Text>
-                        <Text>{item.comment} {item.date}</Text>
-                        <Image source={item.mode === "fitness" ? fitness : beauty} style={{width: 28, height: 28}}/>
+                    return <View style={styles.article}>
+                        <Image source={item.image} style={styles.articleImage}/>
+                        <Text style={styles.articleTitle}>{item.title}</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text>{item.comment}</Text>
+                            <Text>{item.date}</Text>
+                        </View>
+                        <Image source={item.mode === "fitness" ? fitness : beauty} style={styles.articleMode}/>
                     </View>
                 }}
             />
@@ -142,4 +146,27 @@ const styles = {
         marginTop: 40,
         width: '100%',
     },
+    article: {
+        width: '100%',
+        height: 300,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        marginTop: 10,
+    },
+    articleImage: {
+        width: '100%',
+        height: 200,
+    },
+    articleTitle: {
+        fontSize: 24,
+        fontWeight: '900',
+    },
+    articleMode: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+
+        width: 28,
+        height: 28,
+    }
 };
