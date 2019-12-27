@@ -25,7 +25,7 @@ export default class HomeScreen extends React.Component {
                     <Picker.Item label="PMP FITNESS" value="fitness" />
                     <Picker.Item label="PMP BEAUTY" value="beauty" />
                 </Picker>
-                <Image source={sidemenu} style={{width: 20, height: 15, alignSelf: 'center', }}/>
+                <Image source={sidemenu} style={{width: 20, height: 15, alignSelf: 'center'}}/>
             </View>
             <Text style={styles.title}>Главная</Text>
 

@@ -15,6 +15,7 @@ import ProfileScreen from './screens/ProfileScreen';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import NewsScreen from './screens/NewsScreen';
 
 /*
 Navigator Options
@@ -53,6 +54,12 @@ const MainNavigator = createStackNavigator({
   },
   Profile: {
     screen: ProfileScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  News: {
+    screen: NewsScreen,
     navigationOptions: {
       header: null,
     }
