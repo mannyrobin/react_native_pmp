@@ -1,9 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, Text, ImageBackground, Picker } from 'react-native';
+import { TouchableOpacity, Image, View, Text, ImageBackground, FlatView } from 'react-native';
 import Colors from '../constants/Colors';
 import Constants from '../constants/Constants';
 
 const sidemenu = require('../assets/images/icons/sidemenu.png');
+const fitness = require('../assets/images/icons/fitness.png');
+const beauty = require('../assets/images/icons/beauty.png');
 
 export default class NewsScreen extends React.Component {
     constructor(props) {
@@ -11,6 +13,51 @@ export default class NewsScreen extends React.Component {
         this.state = {
             period: Constants.ALL_ARTICLES,
             articles: [
+                {
+                    id: '00000001',
+                    image: require('../assets/images/sample/article_1.png'),
+                    date: 'Сегодня', 
+                    title: 'Первая тренировка',
+                    comment: 'Полезная информация о подготовке',
+                    mode: 'fitness',
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                    Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                    
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`
+                },
+                {
+                    id: '00000002',
+                    image: require('../assets/images/sample/article_2.png'),
+                    date: 'Неделя', 
+                    title: 'Прием косметолога',
+                    comment: 'Полезная информация о подготовке',
+                    mode: 'beauty',
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                    Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                    
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`
+                },
+                {
+                    id: '00000003',
+                    image: require('../assets/images/sample/article_3.png'),
+                    date: 'Сегодня', 
+                    title: 'Первая тренировка',
+                    comment: 'Полезная информация о подготовке',
+                    mode: 'fitness',
+                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                        • Magna aliqua. Ut enim ad minim veniam
+                    Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                    
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.`
+                },
             ]
         };
     }
@@ -48,6 +95,18 @@ export default class NewsScreen extends React.Component {
                     </Text>
                 </TouchableOpacity>
             </View>
+            <FlatView
+                data={articles}
+                keyExtractor={item => item.id}
+                renderItem={({item}) => {
+                    return <View>
+                        <Image source={item.image} style={{width: '100%', height: 200}}/>
+                        <Text>{item.title}</Text>
+                        <Text>{item.comment} {item.date}</Text>
+                        <Image source={item.mode === "fitness" ? fitness : beauty} style={{width: 28, height: 28}}/>
+                    </View>
+                }}
+            />
         </ImageBackground>
     }
 };
@@ -55,7 +114,7 @@ export default class NewsScreen extends React.Component {
 const styles = {
     container: {
         flex: 1,
-        padding: 40,
+        padding: 20,
     },
     title: {
         fontSize: 36,
