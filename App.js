@@ -6,6 +6,60 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import SplashScreen from './screens/SplashScreen';
+import LoginScreen from './screens/LoginScreen';
+import ConfirmSMSScreen from './screens/ConfirmSMSScreen';
+import ChangePasswordScreen from './screens/ChangePasswordScreen';
+import MainMenuScreen from './screens/MainMenuScreen';
+import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
+
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
+/*
+Navigator Options
+*/
+
+const MainNavigator = createStackNavigator({
+  Splash: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  ConfirmSMS: {
+    screen: ConfirmSMSScreen,
+  },
+  ChangePassword: {
+    screen: ChangePasswordScreen
+  },
+  MainMenu: {
+    screen: MainMenuScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
+});
+
+const AppContainer = createAppContainer(MainNavigator);
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -21,8 +75,7 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {/*Platform.OS === 'ios' && <StatusBar barStyle="default" />*/}
-        <SplashScreen />
+        <AppContainer/>
       </View>
     );
   }
