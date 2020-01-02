@@ -12,10 +12,12 @@ import ChangePasswordScreen from './screens/ChangePasswordScreen';
 import MainMenuScreen from './screens/MainMenuScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import NewsScreen from './screens/NewsScreen';
+import ArticleScreen from './screens/ArticleScreen';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import NewsScreen from './screens/NewsScreen';
+
 
 /*
 Navigator Options
@@ -62,6 +64,12 @@ const MainNavigator = createStackNavigator({
     screen: NewsScreen,
     navigationOptions: {
       header: null,
+    }
+  },
+  Article: {
+    screen: ArticleScreen,
+    navigationOptions: {
+      title: 'Статья'
     }
   },
 });
