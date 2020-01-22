@@ -23,6 +23,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+    	"package": "com.sport.pmp"
+    },
     "ios": {
       "supportsTablet": true
     }
